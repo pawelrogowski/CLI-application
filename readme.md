@@ -28,4 +28,5 @@
   Make export of created functions via `module.exports`
 
 **Step 3**
-Make an import of the `contacts.js` module in the `index.js` file and check the functionality of the functions for working with contacts.
+
+- Make an import of the `contacts.js` module in the `index.js` file and check the functionality of the functions for working with contacts.
