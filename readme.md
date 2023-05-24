@@ -26,3 +26,6 @@
 - Create a `contactsPath` variable and put the path to the `contacts.json` file in it. To compose a path, use the methods of the `path` module
 - Add functions to work with a collection of contacts. In functions, use the `fs` module and its `readFile()` and `writeFile()` methods
   Make export of created functions via `module.exports`
+
+**Step 3**
+Make an import of the `contacts.js` module in the `index.js` file and check the functionality of the functions for working with contacts.
