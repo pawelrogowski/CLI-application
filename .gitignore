@@ -1,1 +1,4 @@
-/.buildt
+
+/node_modules
+
+.buildt

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
+    "nano": "^10.1.2",
     "path": "^0.12.7"
   }
 }
