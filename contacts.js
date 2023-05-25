@@ -51,14 +51,14 @@ async function getContactById(contactId) {
     const filteredContact = contacts.find(
       (contact) => contact.id === contactId
     );
-    console.log(filteredContact);
+    console.table(filteredContact);
     return filteredContact;
   } catch (err) {
     console.error(`Error Reading File: ${contactsPath}`, err);
   }
 }
 
-getContactById("qdggE76Jtbfd9eWJHrssH");
+// getContactById("qdggE76Jtbfd9eWJHrssH");
 
 /**
  * Removes a contact with the specified ID from the contacts file.
@@ -83,7 +83,7 @@ function removeContact(contactId) {
         console.error(`Error Writing File: ${contactsPath}`, err);
         return;
       }
-      // console.log(`Contact with ID ${contactId} removed.`);
+      console.log(`Removed contact with ID: ${contactId}`);
     });
   });
 }
@@ -119,7 +119,7 @@ function addContact(name, email, phone) {
         console.error(`Error Writing File: ${contactsPath}`, err);
         return;
       }
-      // console.log(`New contact added:`, newContact);
+      console.table(newContact);
     });
   });
 }

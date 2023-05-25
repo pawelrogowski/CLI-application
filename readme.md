@@ -36,3 +36,23 @@
 - The `index.js` file imports the `yargs` package for convenient parsing of command line arguments.
 - Use the ready-made function `invokeAction()` which receives the type of action to be performed and the required arguments.
 - The function calls the appropriate method from the `contacts.js` file, passing it the necessary arguments.
+
+**Step 5**
+Run the commands in the terminal and take a separate screenshot of the result of each command.
+
+- `node index.js --action list`
+- `node index.js --action get --id 05olLMgyVQdWRwgKfg5J6`
+- `node index.js --action add --name Mango --email mango@gmail.com --phone 322-22-22`
+- `node index.js --action remove --id qdggE76Jtbfd9eWJHrssH`
+
+**LIST**
+![Alt Text](./images/list.png)
+
+**GET**
+![Alt Text](./images/get.png)
+
+**ADD**
+![Alt Text](./images/add.png)
+
+**Remove**
+![Alt Text](./images/remove.png)
