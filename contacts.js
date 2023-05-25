@@ -1,24 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const { v4: uuidv4 } = require("uuid"); // for generating unique IDs
-// __dirname is node.js global variable that points to the directory of file it was invoked from
-// __dirname + db + contacts.json = .../goit-node-hw-01/db/contacts.json
+const { v4: uuidv4 } = require("uuid");
 const contactsPath = path.join(__dirname, "db", "contacts.json");
-
-/*
-    The fs.readFile method takes a filepath, optional encoding string
-    and a callback function that should handle errors and the data.
-    if you don't pass the encoding string the data will stay as a buffer object
-    you can use toString(data) to fix it.
-*/
-
-/*
-    The fs.writeFile method is used to write data to a file. It takes a filepath,
-    the data to be written, optional encoding string, and a callback function
-    that should handle errors.
-    It basicly replaces the old file contents with new one, or if the file doesn't exist
-    it will then create the file
-*/
 
 /**
  * Reads the contents of the contacts file and returns it as a JavaScript object.
@@ -30,13 +13,11 @@ function listContacts() {
       console.error(`Error Reading File: ${contactsPath}`, err);
       return;
     }
-    const contacts = JSON.parse(data); // converts json string into js object so we can use object methods on it
+    const contacts = JSON.parse(data);
     console.table(contacts);
     return contacts;
   });
 }
-
-// listContacts();
 
 /**
  * Retrieves a contact with the specified ID from the contacts file asynchronously.
@@ -57,8 +38,6 @@ async function getContactById(contactId) {
     console.error(`Error Reading File: ${contactsPath}`, err);
   }
 }
-
-// getContactById("qdggE76Jtbfd9eWJHrssH");
 
 /**
  * Removes a contact with the specified ID from the contacts file.
@@ -110,10 +89,8 @@ function addContact(name, email, phone) {
       phone: phone,
     };
 
-    // Add the new contact to the contacts array
     contacts.push(newContact);
 
-    // Write the updated contacts list back to the file
     fs.writeFile(contactsPath, JSON.stringify(contacts), (err) => {
       if (err) {
         console.error(`Error Writing File: ${contactsPath}`, err);
