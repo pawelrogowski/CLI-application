@@ -18,8 +18,10 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
+    "commander": "^10.0.1",
     "fs": "^0.0.1-security",
-    "nano": "^10.1.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "uuidv4": "^6.2.13",
+    "yargs": "^17.7.2"
   }
 }

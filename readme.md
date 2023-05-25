@@ -30,3 +30,9 @@
 **Step 3**
 
 - Make an import of the `contacts.js` module in the `index.js` file and check the functionality of the functions for working with contacts.
+
+**Step 4**
+
+- The `index.js` file imports the `yargs` package for convenient parsing of command line arguments.
+- Use the ready-made function `invokeAction()` which receives the type of action to be performed and the required arguments.
+- The function calls the appropriate method from the `contacts.js` file, passing it the necessary arguments.

@@ -1,16 +1,23 @@
 const fs = require("fs");
 const path = require("path");
-const nano = require("nano"); // a library for generating unique IDs
-
-// __dirname is node.js global variable that points the the directory of file it was invoked in
+const { v4: uuidv4 } = require("uuid"); // for generating unique IDs
+// __dirname is node.js global variable that points to the directory of file it was invoked from
 // __dirname + db + contacts.json = .../goit-node-hw-01/db/contacts.json
 const contactsPath = path.join(__dirname, "db", "contacts.json");
 
 /*
-    the fs.readFile method takes a filepath, optional encoding string
+    The fs.readFile method takes a filepath, optional encoding string
     and a callback function that should handle errors and the data.
     if you don't pass the encoding string the data will stay as a buffer object
     you can use toString(data) to fix it.
+*/
+
+/*
+    The fs.writeFile method is used to write data to a file. It takes a filepath,
+    the data to be written, optional encoding string, and a callback function
+    that should handle errors.
+    It basicly replaces the old file contents with new one, or if the file doesn't exist
+    it will then create the file
 */
 
 /**
@@ -24,8 +31,7 @@ function listContacts() {
       return;
     }
     const contacts = JSON.parse(data); // converts json string into js object so we can use object methods on it
-    console.log(`found ${contacts.length} contacts`);
-    console.log(`${contactsPath} file contents:`, contacts);
+    console.table(contacts);
     return contacts;
   });
 }
@@ -33,34 +39,26 @@ function listContacts() {
 // listContacts();
 
 /**
- * Retrieves a contact with the specified ID from the contacts file.
+ * Retrieves a contact with the specified ID from the contacts file asynchronously.
  * @param {string} contactId - The ID of the contact to be retrieved.
  * @returns {Object|null} The contact object with the specified ID, or null if the contact does not exist.
+ * @throws {Error} If an error occurs while reading the file or parsing the data.
  */
-function getContactById(contactId) {
-  fs.readFile(contactsPath, "utf-8", (err, data) => {
-    if (err) {
-      console.error(`Error Reading File: ${contactsPath}`, err);
-      return;
-    }
+async function getContactById(contactId) {
+  try {
+    const data = await fs.promises.readFile(contactsPath, "utf-8");
     const contacts = JSON.parse(data);
-    // check if the contact even exist
-    const contactExists = contacts.some((contact) => contact.id === contactId);
-
-    if (contactExists) {
-      const filteredContact = contacts.filter(
-        (contact) => contact.id === contactId
-      );
-      console.log(filteredContact);
-      return filteredContact;
-    } else {
-      console.log(`Contact with ID ${contactId} does not exist.`);
-      return null;
-    }
-  });
+    const filteredContact = contacts.find(
+      (contact) => contact.id === contactId
+    );
+    console.log(filteredContact);
+    return filteredContact;
+  } catch (err) {
+    console.error(`Error Reading File: ${contactsPath}`, err);
+  }
 }
 
-// getContactById("qdggE76Jtbfd9eWJHrssH");
+getContactById("qdggE76Jtbfd9eWJHrssH");
 
 /**
  * Removes a contact with the specified ID from the contacts file.
@@ -85,7 +83,7 @@ function removeContact(contactId) {
         console.error(`Error Writing File: ${contactsPath}`, err);
         return;
       }
-      console.log(`Contact with ID ${contactId} removed.`);
+      // console.log(`Contact with ID ${contactId} removed.`);
     });
   });
 }
@@ -106,7 +104,7 @@ function addContact(name, email, phone) {
 
     // Create a new contact object with a unique ID
     const newContact = {
-      id: nano(), // nano() used to generate unique ID
+      id: uuidv4(),
       name: name,
       email: email,
       phone: phone,
@@ -121,7 +119,7 @@ function addContact(name, email, phone) {
         console.error(`Error Writing File: ${contactsPath}`, err);
         return;
       }
-      console.log(`New contact added:`, newContact);
+      // console.log(`New contact added:`, newContact);
     });
   });
 }
